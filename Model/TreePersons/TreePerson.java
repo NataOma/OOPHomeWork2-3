@@ -6,18 +6,21 @@ import Model.Humans.ComparatorHumanByName;
 import Model.Humans.Human;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TreePerson implements Serializable, Iterable<Human> {
     private final ArrayList<Human> tree;
+    private int ID=1;
 
     public TreePerson(){
         this.tree = new ArrayList<>();
     }
 
     public void addHuman(Human human){
-        if (!(human.getId()>0) & !this.tree.contains(human)) {
+        if (!this.tree.contains(human)) {
+            human.setId(ID++);
             this.tree.add(human);
         }
     }
@@ -41,6 +44,16 @@ public class TreePerson implements Serializable, Iterable<Human> {
     public Human findHuman(String name){
         for(Human human: this.tree){
             if (name.equals(human.getFirstName())) return human;
+        }
+        return null;
+    }
+
+    public Human findHuman(String name, String lastname, String dob){
+        LocalDate date_of_birthday = LocalDate.parse(dob);
+        for(Human human: this.tree){
+            if (name.equals(human.getFirstName()) &&
+                    lastname.equals(human.getLastName()) &&
+                    date_of_birthday.equals(human.getDob())) return human;
         }
         return null;
     }
