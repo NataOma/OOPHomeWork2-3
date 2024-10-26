@@ -20,5 +20,8 @@ public class Service {
     public TreePerson getTree(){
         return familyTree;
     }
+//    public void setFamily(String Parent, String children){
+//        familyTree.findHuman(Parent).addChildren(familyTree);
+//    }
 
 }
